@@ -10,9 +10,14 @@ namespace ForeighExchange6.ViewModels
     using Models;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using System.ComponentModel;
 
-    public class MainViewModel
+    public class MainViewModel :  INotifyPropertyChanged
     {
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged; 
+        #endregion
+
         #region Porperties
         public String Amount
         {
@@ -37,16 +42,63 @@ namespace ForeighExchange6.ViewModels
 
         public bool IsRunning
         {
-            get;
-            set;
+            get
+            {
+                return _isRunning;
+            }
+            set
+            {
+                if (_isRunning != value)
+                    _isRunning = value;
+                    PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(IsRunning)));
+            }
         }
         public bool iIsEnabled
         {
             get;
             set;
         }
+        public String Result
+        {
+            get
+            {
+                return _result;
+            }
+            set
+            {
+                if (_result!= value)
+                    _result = value;
+                    PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(_result)));
+            }
+        }
         #endregion
 
+        #region Attributes
+        bool _isRunning;
+        string _result;
+        #endregion
+
+        #region Constructors
+        public MainViewModel()
+        {
+            LoadRates();
+        }
+
+        
+        #endregion
+
+        #region Methods
+        void LoadRates()
+        {
+            IsRunning = true;
+            Result = "Loading rates...";
+        }
+        #endregion
+        
         #region Commands
         public ICommand ConvertCommand
         {

@@ -4,8 +4,7 @@
              x:Class="ForeighExchange6.Views.MainView"
              BindingContext="{Binding Main, Source={StaticResource Locator}}">
     <ContentPage.Content>
-        <StackLayout
-            Padding="20,30,20,10">
+        <StackLayout>
             <Label         
                 FontSize="Large"
                 FontAttributes="Bold"
