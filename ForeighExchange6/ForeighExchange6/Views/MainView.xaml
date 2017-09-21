@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForeighExchange6.Views.MainView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="20,30,20,10">
+            <Label         
+                FontSize="Large"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Flreighh Exchange" >
+            </Label>
+            <Label         
+                Text="Amount:" >
+            </Label>
+            <Entry
+                Text="{Binding Amount, Mode=TwoWay}"
+                Placeholder="Enter the amount to converter">
+            </Entry>
+            <Label         
+                Text="Source Rate" >
+            </Label>
+            <Picker
+                ItemsSource="{Binding Rates}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SourceRate, Mode=TwoWay}"
+                Title="Select a source rate...">
+            </Picker>
+            <Label         
+                Text="Target Rate" >
+            </Label>
+            <Picker
+                 ItemsSource="{Binding Rates}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding TargetRate,Mode=TwoWay}"
+                Title="Select a target Rate..">
+            </Picker>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                
+            </ActivityIndicator>
+            <Button
+                Command="{Binding ConvertCommand}"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                Text="Convert">
+            </Button>
+            <Label
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="Silver"
+                Text="{Binding Result, Mode=TwoWay}"
+                Margin="0,20"
+                TextColor="Black"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+             
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
