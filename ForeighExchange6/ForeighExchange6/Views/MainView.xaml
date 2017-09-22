@@ -9,33 +9,76 @@
                 FontSize="Large"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
-                Text="Flreighh Exchange" >
+                Margin="10"
+                Text="Foreigh Exhange" >
             </Label>
-            <Label         
-                Text="Amount:" >
-            </Label>
-            <Entry
-                Text="{Binding Amount, Mode=TwoWay}"
-                Placeholder="Enter the amount to converter">
-            </Entry>
-            <Label         
-                Text="Source Rate" >
-            </Label>
-            <Picker
-                ItemsSource="{Binding Rates}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SourceRate, Mode=TwoWay}"
-                Title="Select a source rate...">
-            </Picker>
-            <Label         
-                Text="Target Rate" >
-            </Label>
-            <Picker
-                 ItemsSource="{Binding Rates}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding TargetRate,Mode=TwoWay}"
-                Title="Select a target Rate..">
-            </Picker>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label  
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Amount:" 
+                    VerticalOptions="Center">
+                </Label>
+                <Entry
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Text="{Binding Amount, Mode=TwoWay}"
+                    Placeholder="Enter the amount to converter">
+                </Entry>
+                 <Label   
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalOptions="Center"
+                    Text="Source Rate" >
+                </Label>
+                <Picker
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Rates}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SourceRate, Mode=TwoWay}"
+                    Title="Select a source rate...">
+                </Picker>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Target Rate" 
+                    VerticalOptions="Center">
+                </Label>
+                <Picker
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Rates}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SourceRate, Mode=TwoWay}"
+                    Title="Select a source rate...">
+                </Picker>
+                <Image
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HeightRequest="10"
+                    Source="change.png"
+                    WidthRequest="10">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding SwitchsCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+
             <ActivityIndicator
                 IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 
