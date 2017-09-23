@@ -9,7 +9,7 @@ namespace ForeighExchange6.Helpers
     {
       static Lenguages()
         {
-            var ci = DependencyService.Get<ILocalize>().GetCultureInfo();
+            var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             Resource.Culture = ci;
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
@@ -32,7 +32,7 @@ namespace ForeighExchange6.Helpers
             get { return Resource.AmountPlaceHolder; }
         }
 
-        public static string AAmountValidation
+        public static string AmountValidation
         {
             get { return Resource.AmountValidation; }
         }
@@ -85,6 +85,24 @@ namespace ForeighExchange6.Helpers
         {
             get { return Resource.Title; }
         }
+        public static string SettingConexionValidation
+        {
+            get { return Resource.SettingConexionValidation; }
+        }
+
+        public static string ConexionInternetValidation
+        {
+            get {
+                return Resource.ConexionInternetValidation;}
+        }
+        public static string fromChargedRate
+        {
+            get
+            {
+                return Resource.fromChargedRate;
+            }
+        }
+
 
 
     }

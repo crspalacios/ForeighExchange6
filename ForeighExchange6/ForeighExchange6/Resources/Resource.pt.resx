@@ -132,17 +132,26 @@
   <data name="AmountValidation" xml:space="preserve">
     <value>Você deve inserir um valor em quantidade.</value>
   </data>
+  <data name="ConexionInternetValidation" xml:space="preserve">
+    <value>Verifique se você está conectado à internet.</value>
+  </data>
   <data name="Convert" xml:space="preserve">
     <value>Converter</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Erro</value>
   </data>
+  <data name="fromChargedRate" xml:space="preserve">
+    <value>Taxa cobrada da internet</value>
+  </data>
   <data name="Loading" xml:space="preserve">
     <value>Taxas de carregamento</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Pronto para vonverter</value>
+  </data>
+  <data name="SettingConexionValidation" xml:space="preserve">
+    <value>Verifique suas configurações de internet</value>
   </data>
   <data name="SourceRateLabel" xml:space="preserve">
     <value>Fonte:</value>

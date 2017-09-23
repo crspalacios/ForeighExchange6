@@ -107,6 +107,15 @@ namespace ForeighExchange6.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checkk your internet conexion.
+        /// </summary>
+        public static string ConexionInternetValidation {
+            get {
+                return ResourceManager.GetString("ConexionInternetValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Convert.
         /// </summary>
         public static string Convert {
@@ -125,6 +134,15 @@ namespace ForeighExchange6.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate charged from internet.
+        /// </summary>
+        public static string fromChargedRate {
+            get {
+                return ResourceManager.GetString("fromChargedRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading rates...
         /// </summary>
         public static string Loading {
@@ -139,6 +157,15 @@ namespace ForeighExchange6.Resources {
         public static string Ready {
             get {
                 return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check your internet setting.
+        /// </summary>
+        public static string SettingConexionValidation {
+            get {
+                return ResourceManager.GetString("SettingConexionValidation", resourceCulture);
             }
         }
         

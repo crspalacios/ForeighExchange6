@@ -14,14 +14,35 @@ namespace ForeighExchange6.ViewModels
     using System.Net.Http;
     using Newtonsoft.Json;
     using Xamarin.Forms;
+    using ForeighExchange6.Helpers;
+    using ForeighExchange6.Services;
 
     public class MainViewModel :  INotifyPropertyChanged
     {
         #region Events
-        public event PropertyChangedEventHandler PropertyChanged; 
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Services
+        ApiService apiServices;
         #endregion
 
         #region Porperties
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                if (_status != value)
+                    _status = value;
+                PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(nameof(Status)));
+            }
+        }
         public String Amount
         {
             get;
@@ -124,6 +145,7 @@ namespace ForeighExchange6.ViewModels
         bool _isRunning;
         bool _isEnabled;
         string _result;
+        string _status;
         ObservableCollection<Rate> _rates;
         Rate _sourceRate;
         Rate _targetRate;
@@ -132,6 +154,7 @@ namespace ForeighExchange6.ViewModels
         #region Constructors
         public MainViewModel()
         {
+            apiServices = new ApiService();
             LoadRates();
         }
 
@@ -142,33 +165,30 @@ namespace ForeighExchange6.ViewModels
         async void LoadRates()
         {
             IsRunning = true;
-            Result = "Loading rates...";
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("http://apiexchangerates.azurewebsites.net");
-                var controller = "/api/Rates";
+            Result = Lenguages.Loading;
 
-                var response = await client.GetAsync(controller);
-                var result = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    IsRunning = false;
-                    Result = result;
-                }
-                var rates = JsonConvert.DeserializeObject<List<Rate>>(result);
-                Rates = new ObservableCollection<Rate>(rates);
-
-                IsRunning = false;
-                IsEnabled = true;
-                Result = "Ready to convert!";
-            }
-            catch (Exception ex)
+            var connection = await apiServices.CheckConnection();
+            if(!connection.IsSuccess)
             {
                 IsRunning = false;
-                Result = ex.Message;
+                Result = connection.Message;
+                return;
             }
 
+            var response = await apiServices.GetList<Rate>("http://apiexchangerates.azurewebsites.net", "/api/Rates");
+
+            if(!response.IsSuccess)
+            {
+                IsRunning = false;
+                Result = response.Message;
+                return;
+            }
+
+            Rates = new ObservableCollection<Rate>((List<Rate>)response.Result);
+            IsRunning = false;
+            IsEnabled = true;
+            Result = Lenguages.Loading;
+            Status = Lenguages.fromChargedRate;
         }
         #endregion
 
@@ -201,25 +221,33 @@ namespace ForeighExchange6.ViewModels
         {
             if (string.IsNullOrEmpty(Amount))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter a valur in amount.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Lenguages.Error,
+                                                                Lenguages.AmountValidation,
+                                                                Lenguages.Accept);
+                                                                
                 return;
             }
 
             decimal amount = 0;
             if(!decimal.TryParse(Amount, out amount))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter a nnumeric value.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Lenguages.Error,
+                                                                Lenguages.AmountNumericValidation,
+                                                                Lenguages.Accept);
                 return;
             }
 
             if (SourceRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must select a source rate.", "Accept");
-                return;
+                await Application.Current.MainPage.DisplayAlert(Lenguages.Error,
+                                                                Lenguages.SourceRateValidation,
+                                                                Lenguages.Accept);
             }
             if (TargetRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must select a source target", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Lenguages.Error,
+                                                                Lenguages.TargetRateTitle,
+                                                                Lenguages.Accept);
                 return;
             }
 

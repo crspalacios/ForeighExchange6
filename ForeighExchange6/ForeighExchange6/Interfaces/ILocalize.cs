@@ -6,7 +6,7 @@ namespace ForeighExchange6.Interfaces
 
     public interface ILocalize
     {
-        CultureInfo GetCultureInfo();
+        CultureInfo GetCurrentCultureInfo();
         void SetLocale(CultureInfo ci);
     }
 }

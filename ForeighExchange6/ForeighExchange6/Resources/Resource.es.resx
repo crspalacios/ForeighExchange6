@@ -132,17 +132,26 @@
   <data name="AmountValidation" xml:space="preserve">
     <value>Debes ingresar un valor cantidad</value>
   </data>
+  <data name="ConexionInternetValidation" xml:space="preserve">
+    <value>Revisa que estes conectado a internet.</value>
+  </data>
   <data name="Convert" xml:space="preserve">
     <value>Convertir</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="fromChargedRate" xml:space="preserve">
+    <value>Tasas Cargadas de internet</value>
+  </data>
   <data name="Loading" xml:space="preserve">
     <value>Cargando monedas</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>!Listo para convertir!</value>
+  </data>
+  <data name="SettingConexionValidation" xml:space="preserve">
+    <value>Revisa tu configuracion de internet</value>
   </data>
   <data name="SourceRateLabel" xml:space="preserve">
     <value>Moneda origen:</value>
